@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: demo-deployment
+  name: kub-deployment
   labels:
-    app: demo
+    app: kub
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: demo
+      app: kub
   template:
     metadata:
       labels:
-        app: demo 
+        app: kub 
     spec:
       containers:
-      - name: demoserver
-        image: aishwaryas23/demo:latest
+      - name: kubserver
+        image: aishwaryas23/pipeline:latest
         ports:
         - containerPort: 3000
