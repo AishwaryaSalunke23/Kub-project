@@ -1,37 +1,40 @@
-kind: Deployment
+
+   
 apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: devops
+  name: nodeapp-deployment
+  labels:
+    app: nodeapp
 spec:
-    replicas: 2
-    selector:    #Tells the container which pods to watch/belong to
+  replicas: 1
+  selector:
     matchLabels:
-      app: devops
-    template:
-      metadata:
-        labels:
-          app: devops
+      app: nodeapp
+  template:
+    metadata:
+      labels:
+        app: nodeapp 
     spec:
       containers:
-      - name: devops
-        image: aishwaryas23/pipeline-demo
-        imagePullPolicy: Always
+      - name: nodeserver
+        image: thetips4you/nodeapp:latest
         ports:
-        - containerPort: 80
-
+        - containerPort: 3000
+        
+        
 ---
 
-kind: Service        #Defines to create service type object
 apiVersion: v1
+kind: Service
 metadata:
-  name: devops
-  labels:
-    app: devops
+  name: nodeapp-service
 spec:
   selector:
-    app: devops    #Apply this service to any pods which has the specific label
-  type: LoadBalancer      #Specifies the service type i.e. ClusterIP or NodePort
+    app: nodeapp 
+  type: LoadBalancer
   ports:
-  - port: 8080 
-    targetPort: 80          #Container port exposed
-    nodePort: 31200         #Pods port
+  - protocol: TCP
+    port: 5000
+    targetPort: 3000
+    nodePort: 31110
