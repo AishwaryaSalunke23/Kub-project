@@ -1,20 +1,21 @@
-kind: Deployment
 apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: devops
+  name: demo-deployment
+  labels:
+    app: demo
 spec:
-    replicas: 2
-    selector:    #Tells the container which pods to watch/belong to
+  replicas: 1
+  selector:
     matchLabels:
-      app: devops
-    template:
-      metadata:
-        labels:
-          app: devops
+      app: demo
+  template:
+    metadata:
+      labels:
+        app: demo 
     spec:
       containers:
-      - name: devops
-        image: aishwaryas23/pipeline-demo
-        imagePullPolicy: Always
+      - name: demoserver
+        image: aishwaryas23/demo:latest
         ports:
-        - containerPort: 80
+        - containerPort: 3000
