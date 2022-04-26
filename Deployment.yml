@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: devops
-        image: aishwaryas23/pipeline-demo:latest
+        image: aishwaryas23/devops:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 80
