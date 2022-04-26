@@ -1,21 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: kub-deployment
-  labels:
-    app: kub
+  name: devops
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
-      app: kub
+      app: devops
   template:
     metadata:
       labels:
-        app: kub 
+        app: devops 
     spec:
       containers:
-      - name: kubserver
-        image: aishwaryas23/pipeline:latest
+      - name: devops
+        image: aishwaryas23/pipeline-demo:latest
+        imagePullPolicy: Always
         ports:
-        - containerPort: 3000
+        - containerPort: 80
